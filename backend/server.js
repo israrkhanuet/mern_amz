@@ -6,7 +6,18 @@ const app = express();
 app.use(cors());
 
 app.get("/api/products", (req, res) => {
-  console.log("Hello");
+  console.log("Products");
+  res.send(data.products);
+});
+
+app.get("/api/products/slug/:slug", (req, res) => {
+  const product = data.products.find((x) => x.slug === req.params.slug);
+  if (product) {
+    res.send(product);
+  } else {
+    res.send({ message: "Product Not Found" });
+  }
+  console.log("Product");
   res.send(data.products);
 });
 
