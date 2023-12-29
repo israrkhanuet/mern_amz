@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useReducer } from "react";
 import { Helmet } from "react-helmet-async";
 import axios from "axios";
@@ -28,6 +28,7 @@ const reducer = (state, action) => {
 };
 
 function PorductScreen() {
+  const navigate = useNavigate();
   const params = useParams();
   const { slug } = params;
   const [{ loading, error, product }, dispatch] = useReducer(reducer, {
@@ -66,6 +67,7 @@ function PorductScreen() {
       type: "CART_ADD_ITEM",
       payload: { ...product, quantity },
     });
+    navigate("/cart");
   };
   return loading ? (
     <LoadingBox />
